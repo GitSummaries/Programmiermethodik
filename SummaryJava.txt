@@ -1,0 +1,1394 @@
+Java 
+
+1. Basics
+1.1 Definitions
+
+- Programmierparadigma
++ Umgang mit den zu verarbeitenden Daten und Operationen
++ Imperatives Programmierparadigma
+-> Folge von Anweisungen die streng sequenziell abgearbeitet wird 
++ Objektorientiertes Programmierparadigme
+-> verfügt über weitgehende Konzepte wie Klassen, Vererbung und Polymorphie
++ Funktionales Programmierparadigma
+-> rein funktionale Programmierung kennt keine Wertzuweisung
+-> Reihe von Funktionsaufrufen, die eine Eingabe in eine Ausgabe transformiert 
++ Logisches programmierparadigma
+-> verwendet Logik zur Darstellung und Lösung von Problemen 
++ Programm besteht aus einer Menge von Axiomen, 
+  aus denen der Interpreter eine Lösungsaussage berechnet
+
+- Abstraktionsgrad
++ der Abstraktionsgrad definiert, wie weit sich die Semantik der einzelnen Sprachkonstrukte
+  von den Grundbefehlen des Mikroprozessors unterscheidet 
+
++ Abstraktionsgrade
+-> Maschinensprache: wird direkt vom Prozessor verstanden
+-> Assembler: Einsatz symbolischer Namen, Sprungmarken etc.
+-> Höhere Programmiersprachen: Kontrollstrukturen, Datentypen etc.
+-> Objektorientierte Programmiersprachen: Daten und Methoden bilden eine Einheit
+-> Deklarative Programmiersprachen (funktional/logisch): kein Unterschied zwischen Daten
+und Operationen
+
+- Ausführung der Programmiersprache
++ Übersetzende Programmiersprachen (z.B. C)
+-> der Quelltext eines Programms wird vor der ersten Ausführung durch einen Übersetzer
+   in eine Zielsprache (Maschinensprache) übersetzt
+-> hohe Ausführungsgeschwindigkeit durch Optimierung
+-> Überprüfung auf Fehler vor Auführung
+-> Übersetzung in Maschinen code macht Programm Plattform-abhängig
++ Interpretierende Programmiersprachen (z.B. Python)
+-> der Quelltext eines Programms wird zur Laufzeit von einem Interpreter eingelesen und Befehl 
+   für Befehl abgearbeitet
+-> langsamere Ausführungsgeschwindigkeit
+-> felxibler (bei kleinen Änderungen)
+-> Programme laufen auf jeder Plattform, für die Interpreter vorhanden ist
++ Mischformen (z.B. Java)
+-> Programm wird vom Java Compiler (javac-Compiler) in einen Zwischencode (Bytecode) übersetzt
+-> Bytecode ist für alle Rechner/Betriebsysteme gleich 
+-> Bytecode wird mittels Interpreter ausgeführt (virtuelle Maschine, JVM=JavaVirtualMachine) 
+-> JVM dient als Schnittstelle zwischen Bytecode und Betriebssystem
+-> für jede Plattform existiert eine eigene JVM 
+-> Java Quellcode -> Javac Compiler -> Java Bytecode/Bibliotheken -> Java Virtual Machine -> Betriebssystem -> Hardware
+
+-> Ausführung auf der Kommandozeile: 
+   Übersetzen:
+   javac HelloWorld.java
+   Ausführen:
+   java HelloWorld
+
+-> Bsp:
+
+[eva@zangerle examples]$ ls
+HelloWorld.java
+[eva@zangerle examples]$ javac HelloWorld.java
+[eva@zangerle examples]$ ls
+HelloWorld.class HelloWorld.java
+[eva@zangerle examples]$ java HelloWorld
+Hello World!
+
+-> jeder Klassen-file (Quellcode Datei .java) wird vom javac Compiler in ein neues file 
+   kompiliert (Bytecode Datei .class)
+-> diese Bytecode Dateien .class werden dann von der Virtual Machine interpretiert und
+   das Programm auf den unterschiedlichsten Plattformen ausgeführt 
+
+
+- Bytecode
++ ist Plattform-unabhängig und meist sehr kompakt 
++ "write once, run anywhere"
++ besteht aus Maschinensprache-Anweisungen für virtuellen Computer (Virtual Machine)
+ 
+- Virtual Machine 
++ ist die Ausführungseinheit (execution engine)
++ beinhaltet den Klassenlader (class loader)
++ verifizierung des Bytecodes
++ enthält Standardbibliotheken
++ Speicherverwaltung
+
+- Ziele der Sprache Java
++ portierbar
+-> durch Bytecode, der durch die JVM aausgeführt wird
++ objektorientiert
++ robust
+-> strenges Typsystem
+-> automatische Speicherbereinigung 
++ nebenläufig
+-> durch threading
++ sicher
+
+- Programmieren in Java
++ in objektorientierten Sprachen wie Java sind alle Programmteile einer Klasse zugeordnet
++ jedes Programm hat zumindest eine Klasse mit mindestens einem Unterprogramm (Methode)
++ es muss eine Start-Methode geben - in Java ist dies die main-Methode
+
+- Vorteile einer IDE (Alle Nutzen!)
++ Syntax-Highlighting - check
++ Code COmpletion - 
++ effizientes Arbeiten -
++ Debugging - check
++ profiling -
++ Einbindung von Unit-Tests -
++ Formatierung und Refactoring - 
++ Warnungen werden angezeigt - check
++ Unterstützung beim IMports von Klassen/Organisation -
++ einfache Navigation durch eigenen Code -
+
+
+- Kommentare in Java
+
++ einzeilig:
+
+// ...
+
++ Mehrzeilig 
+
+/*
+...
+*/
+
++ JavaDoc-Dokumentation
+
+/**
+...
+*/
+
+- Reservierte Schlüsselwörter 
+
+abstract, continue, for, new, switch, assert, default, if, package, synchronized, boolean,
+do, goto, pricate, this, break, double, implements, protected, throw, byte, else, import, 
+public, throws, case enum, instanceof, return, transient, catch, extends, int, short, 
+try, char, final, interface, static, void, class, finally, long, strictfp, volatile,
+const(*), float, native, super, while
+
+- verwendbare Zeichen für Java
++ die ersten 128 ASCII-Zeichen (Unicode)
+
+1.2 Erstes Beispiel: Java
+
+- jedes Programm hat zumindest eine Klasse mit mindestens einem Unterprogramm (Methode)
+
+class HelloWorld 
+{
+	public static void main(String[] args) 
+	{
+		System.out.println("Hello World!");
+	}
+}
+
+- class 
++ eine Klasse ist eine Blaupause die Objekte die aus dieser Klasse erzeugt werden definiert
+-> eine Klasse ist somit eine Sammlung von Eigenschaften
+-> ein Haus hat eine Tür, Fenster, Dach, Wände und ein Schornstein. 
+   Das ist seine Blaupause und wenn du dann daraus ein Objekt erzeugst ist das quasi dein Haus
+   Dort sagst du wo die Fenster sitzen und wo die Tür ist, wie lang der Schornstein ist usw.
+-> Dazu hat jede Klasse noch Methoden/Funktionen, wie haus_abschließen usw. 
+   Die führen Operationen an dem speziellen Haus (ein Objekt) aus
++ die Klasse erhält hier den Namen HelloWorld
++ damit hat das Programm den Namen HelloWorld => der Code muss in einer Datei HelloWorld.java stehen
+ 
+
+
+- public static void main
++ die main-Methode ist der Startpunkt der Ausführung des Programms
++ die main-Methode ist immer public und static
++ die main-Methode gibt nichts zurück, daher void
++ innerhalb {} dr main-Methode können beliebige Anweisungen stehen, wie z.B.
+System.out.println("Hello World!");
++ die Methode ist in Java wie die Funktion in C
+
+
+1.3 Datentypen 
+
+- der Typ beschränkt die Benutzung der Daten
+- Datentyp legt fest: 
++ Wertebreich
++ Speicherbedarf
++ Operationen, die auf den Datentyp angewandt werden dürfen
+
+- Java bietet 2 Möglichkeiten den Typ von Daten festzulegen 
++ Primitive Datentypen
+-> nicht veränderbar oder ergänzbar, keine Methoden verfügbar 
+-> beginnend mit Kleinbuchstaben
++ Datentypdefinition durch Klassen (Referenztypen)
+-> vorgegebene Klassen 
+-> benutzerdefinierte Klassen
+-> beginnend mit Großbuchstaben
+
+- Javs ist streng typisiert => der Datentyp und ensprechende Operationen sind während
+Programmlaufzeit unveränderlich
+
+- Datentypen und Deklaration von Variablen:
++ Datentyp/en für:
+-> Ganze Zahlen sind byte, short, int, long
+-> Gleitkommazahlen sind float, double
+-> Logische Werte ist boolean
+-> Zeichen, Zeichenketten sind char, String
+
++ Deklaration:
+-> bei der Deklaration einer Variable müssen Bezeichner und Datentyp angegeben werden
+-> z.B. Variable mit Bezeichner 'counter', die ganze Zahlen aufnehmen kann
+
+int counter;
+
+-> Vorteile durch Deklaration:
+- Deklaration erhöht Korrektheit (Überprüfung durch den Compiler)
+- Compiler kann anhand der Deklaration Speicher reservieren (entsprechend dem Datentyp)
+
+- Bezeichner 
++ für Variablen, Konstanten, Methoden, Klassen etc. werden Bezeichner vergeben
++ englische Bezeichner wählen!
++ ein Bezeichner ist ein Folge von Zeichen
++ es gibt bestimmte reservierte Schlüsselwörter
++ Einschränkungen:
+-> erstes Zeichen darf keine Ziffer sein 
+-> Bsp: korrekte Bezeichner vs. falsche Bezeichner
+
+counter vs. 1counter
+carWheel vs. car-Wheel oder car/Wheel
+MAX_COUNT vs. while 
+test2 vs. $%
+
++ Bezeichner sollten bestimmten Regeln folgen:
+-> lesbar und verständlich 
+-> Bsp: sinnvoller Bezeichner vs. wenig sinnvoller Bezeichner
+
+vollständige Wörter: counter vs. c
+Kleinschreibung (bei temporären Variablen üblich): counter vs. COUNTER
+Neue Teile mit Großbuchstaben (bei Konstanten üblich): firstLetterInText vs. firstletterintext
+sinnvolle Bezeichner: counter vs. $OxOl
+Abkürzungen vermeiden: byteCount vs. bc
+englische Bezeichner verwenden: parentNode vs. elternKnoten 
+
+
+
+1.3.1 Datentypen für Ganze Zahlen: byte (8 bit), short (16 bit), int (32 bit), long (64 bit)
+
++ Wertebereich ist endlich und asymmetrisch 
+
+[-xxxx ... xxxx-1]
+
++ Operationen 
+-> additiv: +, - (binär und unär)
+-> multiplikativ: *, /, % (Modulo) (Division ist ganzzahlig, also ohne Rest. Division durch 0 nicht erlaubt)
+-> Vergleiche: ==, !=, <, >, <=, >=
+
+1.3.2 Datentypen für Gleitkommazahlen:
+
++ Gleitkommadarstellung:
+
+x = Mantisse * Basis^Exponent
+(die Größe und die Genauigkeit sind endlich)
+
+IEEE 754 Standard
+32 bit: 8 bit exponent, 23 bit Mantisse, 1 bit Vorzeichen
+
++ Operationen
+-> additiv: +, - (binär, unär)
+-> multiplikativ: *, /
+-> Vergleiche sind möglich aber nicht immer unproblematisch
+-> Operatorpräzdenz wie bei ganzen Zahlen
+
+
+
+|in Java gibt es keinen Überlauf
+
+int maxInteger, overflowInteger;
+maxInteger = Integer.MAX_VALUE;
+// maxInteger = 2147483647
+overflowInteger = maxInteger + 1;
+// overflowInteger = -2147483648 = Integer.MIN_VALUE
+overflowInteger = maxInteger * 2; // Ergibt –2!!!
+
+- Eigenarten:
++ bei additiven Operationen kann man über die Grenzen hinaus und wieder zurückrechnen
++ bei multiplikativen Operationen ist dabei Vorsicht geboten|
+
+
+
+1.4 Operatoren
+
++ Operatoren werden mit Variablen zu Ausdrücken verknüpft 
++ komplexe nicht geklammerte Ausdrücke werden in Teilausdrücke aufgelöst durch:
+-> Präzedenz oder Bindungsstärke 
+   regelt die implizite Klammerung bei Operatoren auf verschiedenen Stufen
+   1 + 2 * 3 = 1 + (2 * 3)
+-> Links/Rechts Assoziativität
+   regelt die implizite Klammerung bei Operatoren auf gleicher Stufe
+   Linksassoziativ: a * b * c = (a * b) * c
+   Rechtsassoziativ: a * b * c = a * (b * c)
+
++ Liste der Operatoren:
+int c = 3, d = 5, e = 4, f= 6, g = 12;
+
+Operator Ausdruck   Erklärung   Ergebnis
++=       c += 7     c = c + 7   10
+-=       d -= 4     d = d - 4   1
+*=       e *= 5     e = e * 5   20
+/=       f /= 3     f = f / 3   2
+%=       g %= 9     g = g % 9   3
+
+-> Inkrement/Dekrement
+
+Operator Benennung       Beispiel   Erklärung
+++       Präinkrement    ++a        a wird vor weiteren Verwendung um 1 erhöht
+++       Postinkrement   a++        a wird nach seiner Verwendung um 1 erhöht
+--       Prädekrement    --b        b wird vor seiner Verwendung um 1 erniedrigt
+--       Postdekrement   b--        b wird nach seiner Verwendung um 1 erniedrigt
+
+-> Java Präzedenzregeln
+
+Stärke Präzedenzgruppen                                               Assoziativität
+14     ( ), [ ], ., ++ (postfix), -- (postfix)                        links
+13     ++ (präfix), -- (präfix), +(unär), -(unär), ~, !, (type), new  rechts
+12     *, /, %                                                        links
+11     +, -, +(String-Konkatenation)                                  links
+10     <<, >>, >>>                                                    links
+9      <, <=, >, >=, instanceof                                       links
+8      ==, !=, == (Referenz), != (Referenz)                           links
+7      & (bitweises UND), & (logisches UND)                           links
+6      ^ (bitweises XOR), ^ (logisches XOR)                           links
+5     | (bitweises ODER), | (logisches ODER)                          links
+4     && (logisches UND mit Short-Circuit-Evaluation)                 links
+3     || (logisches ODER mit Short-Circuit-Evaluation)                links
+2     ?: (bedingte Auswertung)                                        rechts
+1     =, +=, -=, *=, /=, %=, &=, |=, ^=, <<==, >>==, >>>==            rechts
+
+
+1.5 Ganzzahlliterale
+
+- sind Zahlen, Zeichenketten und Wahrheitswerte im Quelltext 
+- brauchen einen Datentyp
+- Beispiele:
++ Ganzzahlliteral 43 vom Typ int: 'int a = 43;' (hänge ich nichts hinten an das Ganzzahlliteral 1234 dran, dann geht der Compiler davon aus, dass es sich um ein Ganzzahlliteral vom Datentyp int handelt)
++ Ganzzahlliteral 0x2B vom Typ int: 'int hex = 0x2B;'
++ Ganzzahlliteral 053 vom Typ int: 'int octal = 053;'
++ Ganzzahlliteral 0b101011 vom Typ int: 'int binary = 0b101011;'
++ Ganzzahlliteral 100_000_000; vom Typ int: 'int money = 100_000_000;'
+
+
++ Crossover mit Gleitkommaliteralen:
+-> Ganzzahlliteral 20 vom Typ double: 'double d = 20;' (hier ist 20 an sich ein Ganzzahlliteral vom Datentyp int , das aber einem double zugewiesen wird => der Compiler konvertiert die 20 in 20.0)
+
+
+|Drei Arten die Zahlenschreibweise anzukündigen:
+ Dezimal beginnt mit einer Zahl von 0 verschieden
+ Oktal beginnt immer mit 0
+ Hexadezimal beginnt immer mit 0x
+ Binärschreibweise beginnt immer mit 0b, gefolgt von den Ziffern 0 und 1|
+
+|Ziffernfolgen können nun auch Unterstriche enthalten:
+ z.B. 1_048_576 statt 1048576|
+
+1.6 Gleitkommaliterale
+
+- sind Gleitkommazahlen im Quelltext
+- enthalten einen Dezimalpunkt oder einen Exponenten oder beides
+- brauchen einen Datentyp
+- bestehen aus einem Vorkommateil, einem Dezimalpunkt, einem Nachkommateil,
+  einem Exponenten und einem Suffix
+- meist als Dezimalzahl + Suffix
+- um ein Gleitkommaliteral von einem inegralen Literal unterscheiden zu können,
+  muss mindestens der Dezimalpunk, der Exponent oder der Suffix vorhanden sein
+- Beispiele:
++ Gleitkommalieral 10.5 vom Typ double: 'double e = 10.5;' (hänge ich nichts hinten an das Gleitkommaliteral 10.5 dran, dann geht der Compiler davon aus, dass es sich um ein Gleitkommaliteral vom Datentyp double handelt)
++ Gleitkommaliteral 10_123.45_34 vom Typ double: 'double funnyNumber = 10_123.45_34;'
++ Gleitkommaliteral 2.3f vom Typ float: 'float floatingNumber = 2.3f;'
+
+
+|Suffixe am Ende:
+ ohne (default) oder d oder D für double
+ f oder F für float|
+
+1.7 logische Werte
+
+- Wertebreich umfasst 2 Werte: true und false
+- Operationen 
+
+Negation: !
+Oder: ||
+Und: &&
+Vergleiche: ==, !=
+
+x      y      !x      x && y      x || y
+true   true   false   true        true
+true   false          false       true
+false  true   true    false       true
+false  false          false       false
+
+- Auswertung logischer Ausdrücke
++ 'Short circuit evaluation' 
+
+1. x && y ist immer false, falls x == false
+2x x || y ergibt immer true, falls x == true
+
++ erhöhte Robustheit:
+-> y darf Code enthalten, der ungültig ist im Fall:
+
+1. (x && y) bei x == false
+2. (x || y) bei x == true
+
+
+1.8 Zeichen
+
+- Deklaration:
+
+char charA = 'A';
+
+- Escape-Sequenzen:
+
+'\n', '\t' etc.
+
+- Operationen:
++ Vergleiche
++ Inkrement, Dekrement
+
+1.9 Zeichenketten (Strings)
+
+- Darstellung von mehreren Zeichen
+- String ist kein primitiver Datentyp!
++ d.h. es ist eine Klasse 
+- Deklaration (eine Möglichkeit)
+
+String stringTest = "Text";
+
+- Operationen
++ Verbinden von Strings/Zeichen durch + (=Verknüpfung / Konkatenation)
++ Vergleiche sind problematisch
+
+1.10,1.11 noch offen
+
+1.12 Block 
+
+- ein Block ist eine Programmeinheit, in der lokale Vereinbarungen getroffen werden können (sind nur dort bekannt)
+- in Java entspricht ein Block einer Verbundanweisung von { bis }
+- Bsp:
+
+public static void main(String[] args) 
+{
+	int x = 2, y = x;                         // der
+	{                                         // Block 
+		int z = y + 2;  // der Block      // von
+		x = z;          // von z          // y 
+	}                                         // und 
+	System.out.println(x + " " + y);          // x (sind nur in diesem Block bekannt)
+}
+
+(Ausgabe)
+4 2
+
+
+1.13 Ausgabe in Java
+
+- Bsp:
+
+System.out.print("Hello World");
+System.out.println("Hello World");
+System.out.println("Hallo " + 3);
+
+- Ausgabe und Eingabe werden über System-Klasse geregelt
+- Ausgabe erfolgt über das out-Feld der Klasse (= Stream)
++ auf diesem Stream wird die Methode print bzw. prinln aufgerufen 
+|println = "print line"|
+
+1.14 Primitive Datentypen in Java
+
+Typ       Größe(Bits)    Wertebereich                                                  Standard
+
+boolean                  true oder false (Repräsentation von der JVM abhängig) 
+char      16             0 to 65535                                                    (ISO Unicodecharacter set)
+byte      8              –128 to +127 
+short     16             –32,768 to +32,767 
+int       32             –2^31 to 2(^31) - 1
+long      64             -2^63 to 2(^63) - 1
+float     32                                                                           (IEEE 754 floating point)
+
+double    64                                                                           (IEEE 754 floating point)
+
+
+
+1.15 Typkompatibilität 
+
+- Variabeln eines Ausdrucks müssen kompatibel sein
+- Problem: 
+
+int typeTest = 2.5;
+
++ erzeugt einen Fehler, da die Datentypen nicht kompatibel sind
+- zwei Typen sind kompatibel wenn:
++ sie gleich sind
++ wenn sie durch implizite Typanpassung zum gleichen Typ führen
+
+- Implizite (automatische) Typanpassung
++ nur in eine Richtung
++ widening conversion
++ kein Datenverlust 
+
+byte -> short -> int/char -> long -> float -> double
+
++ findet statt bei Zuweisungen, Ausdrücken und Parameterübergaben
+
+- Explizite Typanpassung (cast)
++ Form:
+
+(Zieltyp) Ausdruck 
+
+int typeTest = (int) 2.5;
+
++ kann zu Datenverlusten führen.
+-> im Bsp. oben würde man mit 2 weiterrechnen statt mit 2.5
+
+
+
+1.16 Konstanten
+
+- finale lokale Variablen/Konstanten
++ werden am Anfang deklariert (danach keine Zuweisung mehr möglich)
+
+final int testInteger = 10;
+final double testDouble = 10.0;
+
++ aufgeschobene Initialisierung
+
+final int testInteger;
+...
+...
+testInteger = 10;
+
+- finale globale Variablen/Konstanten (für alle Klassen gültig)
+
+static final int VALUE = 10;
+
+- die Verwendung von Konstanten verringert die Anzahl von Fehlerquellen und machen Code
+  auch besser lesbar
+
+
+1.17 Elementare Anweisungen
+
+- leere Anweisung
+
+;
+
+- Block (Zusammenfassung von Anweisungen, die nacheinander ausgeführt werden)
+
+{
+Anweisung1;
+Anweisung2;
+...
+}
+
+- Variablendeklaration
+- Ausdrucksanweisung
+
+Ausdruck;
+
++ innerhalb einer Ausdrucksanweisung ist nur Zuweisung, Inkrement und Dekrement, Methodenaufruf und Instanzerzeugung möglich
+
+1.18 if - Anweisung 
+
+if (b) 
+{
+	Anweisungsfole1
+}
+else
+{
+	Anweisungfolge2
+}
+
++ Ausführung:
+-> die Bedingung (boolescher Ausdruck) wird ausgewertet und dann entsprechend verzweigt 
+-> Klammern (Block) können weggelassen werden, wenn nur eine Anweisung folgt 
+-> else Zweig kann weggelassen werden
+
+- if Kaskade
+
+if (b1) 
+{
+	Anweisungsfole1
+}
+else if (b2)
+{
+	Anweisungfolge2
+}
+else if (b3)
+{
+	Anweisungsfolge3
+}
+...
+else
+{
+AnweisungfolgeX
+}
+
+
+- Bsp: if - Anweisung: lösen quadratischer Gleichung
+
+public class IfTest 
+{
+	public static void main(String[] args) 
+	{
+		double a, b, c;
+		a = Math.random() * 10;
+		b = Math.random() * 10;
+		c = Math.random() * 10;
+		double d = b * b - 4 * a * c;
+
+		if (d < 0) 
+		{
+			System.out.println("Keine Lösung");
+		} 
+		else if (d == 0) 
+		{
+			System.out.println("1 Lösung:" + -b / (2 * a));
+		} 
+		else 
+		{
+			d = Math.sqrt(d);
+			System.out.print("2 Lösungen:");
+			System.out.print((-b + d) / (2 * a) + " und ");
+			System.out.println((-b - d) / (2 * a));
+		}
+	}
+}
+
++ aus der Java Doku:
+-> Math.random() returns a double value with a positive sign, greater than or euql to 0.0 and less than 1.0
+-> Math.sqrt(d) returns the correctly rounded positive square root if a double value
+|Math ist eine Klasse, random ist eine Methode|
+
+
+- dangling else
+
++ nur wichtig wenn ich if/else - Anweisungen ohne Klammern code wie z.B.
+
+if (counter < 5)
+	if (counter % 2 == 0)
+		System.out.println("HERE1");
+else
+	System.out.println("HERE2");
+
+
+-> wohin gehört jetzt der else-Zweig?
+-> else-Zweig gehört zum textuell letzten freien if im selben Block (Blöcke werden durch Klammern fesgelegt. liegen keine Klammern vor Beginnt der Block beim ersten if und endet beim else)
+-> counter mit Wert 7 führt zu keiner Ausgabe
+-> counter mit Wert 3 führt zur Ausgabe "HERE2".
+
+
+1.19 Bedingungsoperator
+
+- erlaubt den Wert eines Ausdrucks von einer Bedingung abhängig zu machen, ohne eine if-Anweisung zu verwednen
+
+Bedingung ? Ausdruck1 : Ausdruck2;
+
++ wenn die Bedingung wahr ist, dann gilt Ausdruck1, sonst Ausdruck2
+- Beispiel:
+
+int max, a, b;
+
+max = (a > b) * a : b;
+
+1.20 switch 
+
+switch(x)
+{
+	case Wert1:
+		Anweisungsfole1;
+		break;
+	case Wert2:
+		Anweisungsfole2;
+		break;
+	deault:
+		Anweisungsfole;
+		break;
+}
+
+- Eigenschaften:
++ verzweigt anhand eines Wertes (Wert1 oder Wert2 etc.) in beliebige Fälle (cases)
++ der Wert muss ein short, byte, int, char oder string sein
++ kann beliebig viele cases enthalen
+-> break sorgt dafür, dass die Ausführung nicht in den folgenden case weiterspringt
+-> cer default case ist optional und wird ausgeführt, wenn kein case unter einem bestimmten Wert ausgeführt werden kann
+
+- Bsp:
+
+public class SwitchExample {
+	public static void main(String[] args) {
+		int x = (int) (Math.random() * 10);
+		switch (x) 
+		{
+			case 0:
+				System.out.println("NULL");
+				break;
+			case 1:
+				System.out.println("EINS");
+				break;
+			default:
+				System.out.println(">=ZWEI");
+				break;
+		}
+	}
+}
+
+
+- Vergleich mit if:
++ ein switch kann immer durch if(s) ersetzt werden
++ ein if kann nicht immer durch ein switch ersetzt werden
+-> beim switch werden nur konstante Werte verwendet
+-> if kann beliebig komplexe boolesche Ausdrücke beinhalten
++ Performance
+-> switch ist meistens schneller als mehrere ifs
+-> switch benötigt mehr Speicherplatz (interne Verwaltung mithilfe einer Tabelle)
+
+1.21 Schleifen
+
+- Anweisungsfolge/Block/Schleifenkörper beliebig oft wiederholen
+- Schleifen bestehen aus:
+-> Schleifenkörper
+-> Abbruchbedingung
+- Varianten in Java:
+
++ while
+-> zuerst Abbruchbedingung abfragen
+-> dann Schleifenkörper ausführen
+
++ do-while
+-> zuerst Schleifenkörper ausführen
+-> dann Abbruchbedingung abfragen
+
++ for
+-> geschlossene Schleife
+-> Initialisierung und Fortschalten ist Teil der Schleifenkonstruktion
+
+1.21.1 while - Schleife
+
+while (Bedingung)
+{
+	Anweisungsfolge;
+	...
+}
+
+- Ausführung
+1. die Bedingung (boolescher Ausdruck) wird ausgewertet
+2. ist die Bedingung wahr? dann wird der Schleifenkörper ausgeführt und nach der ersten Ausführung geht es wieder bei 1. weiter
+3. ist die Bedingung falsch? dann wird die while-Schleife verlassen
+
+- Bsp:
+
+public class WhileTest {
+	public static void main(String[] args) {
+		long i = 2;
+		System.out.println("N \tN^2 \tN^3");
+		while (i <= 2048) 
+		{
+			System.out.print(i);
+			System.out.print('\t');
+			System.out.print(i * i);
+			System.out.print('\t');
+			System.out.print(i * i * i);
+			System.out.println();
+			i *= 2;
+ 		}
+ 	}
+}
+(Ausgabe)
+
+N             N^2             N^3
+2             4               8
+4             16              64
+8             64              512
+16            256             4096
+32            1024            32768
+64            4096            262144
+128           16384           2097152
+256           65536           16777216
+512           262144          134217728
+1024          1048576         1073741824
+2048          4194304         8589934592
+
+
+
+1.21.2 do-while - Schleife
+
+do
+{
+	Anweisungsfolge;
+	...
+} while (Bedingung);
+
+- Ausführung:
+1. der Schleifenkörper (Anweisungsfole wird ausgeführt (mindestens einmal)
+2. die Bedingung (boolescher Ausdruck) wird ausgewertet
+3. ist die Bedingung wahr, dann Spring nach 1
+4. ist die Bedingung falsch, dann wird die nächste Anweisung ausgeführt
+
+- Bsp:
+
+public class DoWhileTest {
+	public static void main(String[] args) {
+		long i = 2;
+		System.out.println("N \tN^2 \tN^3");
+		do
+		{
+			System.out.print(i);
+			System.out.print('\t');
+			System.out.print(i * i);
+			System.out.print('\t');
+			System.out.print(i * i * i);
+			System.out.println();
+			i *= 2;
+ 		} while (i <= 2048);
+ 	}
+}
+
+(Ausgabe)
+
+N             N^2             N^3
+2             4               8
+4             16              64
+8             64              512
+16            256             4096
+32            1024            32768
+64            4096            262144
+128           16384           2097152
+256           65536           16777216
+512           262144          134217728
+1024          1048576         1073741824
+2048          4194304         8589934592
+
+
+
+1.21.3 for - Schleife
+
+for (Initialisierung; Bedingung; Inkrementierung)
+{
+Anweisungsfole;
+}
+
+- Aufbau
++ Initialisierung: wird vor dem Betreten der Schleife ausgeführt
++ Bedingung: wird immer vor der Ausführung der Schleife überprüft
++ Inkrementierung: wird am Ende jedes Schleifendurchlaufs ausgeführt
+
+- Ablauf
+1. Initialisierung wird ausgeführt
+2. die Bedingung wird ausgewertet:
+   1. die Bedingung ist wahr
+	1. Schleifenkörper wird ausgeführt
+	2. Inkrementierung wird ausgeführt
+	3. Bedingung wird wieder geprüft
+   2. die Bedindung ist falsch: die for - Schleife wird verlassen
+
+- Bsp.
+
+public class ForTest{
+	public static void main(String[] args) {
+		System.out.println("N \tN^2 \tN^3");
+		for (long i = 2; i <= 2048; i *= 2) 
+		{
+			System.out.print(i);
+			System.out.print('\t');
+			System.out.print(i * i);
+			System.out.print('\t');
+			System.out.print(i * i * i);
+			System.out.println();
+		}
+	}
+}
+(Ausgabe)
+
+N             N^2             N^3
+2             4               8
+4             16              64
+8             64              512
+16            256             4096
+32            1024            32768
+64            4096            262144
+128           16384           2097152
+256           65536           16777216
+512           262144          134217728
+1024          1048576         1073741824
+2048          4194304         8589934592
+
+
+
+
+1.21.4 foreach
+
+for (<Typ> Variable: Ausdruck)
+{
+	Anweisungsfolge;
+}
+
+- erweiterte for - Schleife
++ erleichtert den Umgang mit listenartigen Datenstrukturen (z.B. Collections)
+
+- Bsp:
+
+public static void main(String[] args) 
+{
+	for (String argument : args) 
+	{
+		System.out.println(argument);
+	}
+}
+
+
+1.22 break und continue
+
+- break
++ wird verwendet, um eine switch-Verzweigung oder eine Schleife zu beenden (zu verlassen)
++ bei verschachtelten Schleifen beendet break immer nur die innerste Schleife, in der break benutzt wird 
+
+- continue
++ mit dieser Anweisung wird der Rest der Anweisungsfolge einer Schleife übersprungen und ein neuer Schleifendurchlauf gestartet
+
+- in Schleifen nur sparsam verwenden
++ kann immer durch entsprechende Formulierung der Schleifenbedingung umgangen werden
+
+
+
+1.23 Methoden (Java only)
+
+|Funktion in C: ist ein 'Unterprogram', das eine Anweisung ausführt und beim Rücksprung einen Wert an das aufrufende Programm zurückliefert|
+|Prozedur in C: ist ein 'Unterprogram', das eine Anweisung ausführt aber kein Rückgabewert hat|
+
+- Funktionen und Prozeduren werden in Java als Methoden zusammengefasst
+
+- Sinn hinter Methoden ist das DRY-Prinzip: "don't repeat yourself!"
+- Wiederverwendung von Code
++ Ausgliedern häufig benutzter Programmteile
++ spart Schreibarbeit
++ macht ein Programm kürzer
++ Wartbarkeit
++ Übersichtlichkeit
+
+- eine Methode, die keinen Wert zurückliefert (= Prozedur) wird mit dem Datentyp void gekennzeichnet (z.B. main-Methode)
+
+
+- Arten von Methoden:
++ Statische Methoden
+-> gehören einer Klasse an
+-> gekennzeichnet mit dem Schlüsselwort static
+
++ Objektbezogene Methoden
+
+
+- Aufbau einer Methode
++ Methodenkopf
+-> Ergebnistyp (= Datentyp des Rückgabewertes), Methodenname und eventuell Parameter (= Variablen die der Methode übergeben werden)
+
++ Methodenrumpf
+-> ist ein Block
+-> enthält Variablendeklarationen und Anweisungen
+-> kann ggf. leer sein
+
+
+- Parameter (= Variablen die der Methode übergeben werden)
++ formale Parameter
+-> werden im Methodenkopf deklariert
+-> werden innerhalb der Methode wie lokale Variablen behandelt 
+
++ aktuelle Paramter
+-> beim Aufruf der Methode wird jeder formale Parameter durch je einen aktuellen Parameter initialisiert 
+
+
+- Signatur einer Methode in Java
++ Name der Methode + Liste der Typen der formalen Parameter = Signatur der Methode
+
+-> Rückgabetyp (Typ der Variable die zurückgegeben wird) gehört nicht zur Signatur
+-> die Namen der Parameter spielen ebenfalls keine Rolle, nur die Typen und ihre Reihenfolge
+-> Bsp.
+
+public static int method1(int param1) {…} //Signatur: method1 (int)
+
+
+- Methodenname
++ der Name einer Methode sollte ausdrücken, was die Methode leistet
++ er sollte mit einem Verb beginnen
++ er wird üblicherweise klein geschrieben
++ falls der Name aus mehreren Worten besteht, sollten die Folgewörter groß anfangen
+-> Bsp:
+
+getResult
+printHeader
+calculateResult
+
+- Parameterübergabe 
++ 'call by value'
+-> Kopie des aktuellen Parameters wird übergeben
+-> Änderungen am formalen Parameter ändern den aktuellen Parameter (= der Parameter mit dem in der Methode gearbeitet wird) nicht 
+
++ 'call by reference'
+-> eine Referenz wird übergeben
+-> Änderungen am formalen Parameter ändern den aktuellen Parameter 
+-> in C: Pointer wird übergeben (int * x)
+
++ in Java: NUR 'call by value' 
+-> bei primitiven Datentypen 
+-> bei Objekten: 'call by value' der Referenzvariable (value ist eine Referenz auf ein Objekt) (vgl. call by reference durch pointer in C) 
+
++ beim Aufruf einer Methode werden die akutellen Parameter an die formalen Parameter übergeben 
+-> dabei finden folgende Aktionen statt:
+   - die Ausdrücke der aktuellen Parameter werden berechnet
+   - der Wert dieser Ausdrücke wird an die entsprechenden formalen formalen Parameter zugewiesen
+     + dabei gelten die Kompatibilitätsregeln
+     + der Typ eines aktuellen Parameters muss gleich oder kleiner als der Typ des formalen Parameters sein (implizite Typkonvertierung)
+   - durch die Zuweisung wird eine Kopie erzeugt
+
++ Bsp: 'call by value'
+
+public class MethodTest 
+{
+	public static void printMax(int a, int b) // formale Parameter a und b
+	{
+		if (a > b) 
+		{
+			System.out.println(a);
+		} 
+		else 
+		{
+			System.out.println(b);
+		}
+	}
+}
+
+
+public class MethodTest 
+{
+	public static void main(String[] args)
+	{
+		int x = 10;  // aktueller Parameter x
+		short y = 20; // aktueller Parameter y
+		printMax(x, y);
+		printMax(2 * 7, 3 + 4 + 5);
+		// printMax(10L,10); Fehler, wegen long!
+
+	}
+}
+
+
+
++ Bsp: 'call by reference'
+
+private static void test(int[] a) 
+{
+	a[1] = 3;
+}
+
+
+public static void main(String[] args) 
+{
+	int[] a = {5,6,7};
+	System.out.println(a[1]);
+	test(a);
+	System.out.println(a[1]);
+}
+(Ausgabe)
+6
+3
+
++ Parameterübergabe von Referenzen
+-> Kopie ist nicht gleich Kopie
+   - Kopie von Basisidatentyp = Kopie des Wertes
+     + nichts kann verändert werden
+-> Kopie von anderen Typen = Kopie der Referenz
+   - Referenz kann nicht verändert werden
+   - das referenzierte Objekt kann aber verändert werden
+
+
+- Rückgabewert einer Methode
+
++ Typ des Rückgabewertes steht vor dem Methodenname
++ Methodenergebnis wird durch eine return-Anweisung zurückgegeben (muss vorhanden sein)
++ leere return-Anweisung (return;) kann auch in einer Prozedur (kein Rückgabewert) verwendet werden => vorzeitiger Abbruch
+
++ Bsp:
+
+public class FactorialTest 
+{
+	public static int calcFactorial(int a) 
+	{
+		int factorial = 1;
+		for (int i = 2; i <= a; i++) 
+		{
+			factorial = factorial * i; 
+		}
+		return factorial; 
+	}
+
+	public static void main(String[] args) {
+		int x;
+		x = calcFactorial(2) + calcFactorial(5);
+		System.out.println(x + calcFactorial(10)); 
+	} 
+}
+(Ausgabe)
+3628922
+
+
+- lokale Variablen innerhalb einer Methode
++ Methoden können neben Anweisungen natürlich auch lokale Deklarationen enthalten
++ Bsp:
+
+public static void method(int x)
+{
+	int y;
+	short s;
+	…
+}
+
+-> deklariert 3 lokale Variablen 
+   - dürfen nur in dieser Methode verwendet werden
+   - beim Aufruf wird der Speicherplatz angelegt
+   - am Ende der Methode wird der Speicherplatz wieder freigegeben
+
+
+- Methoden sollten keine Nebeneffekte haben
++ Methoden liefern Ergebis 
++ Methoden verändern keine Variablen außerhalb 
++ Prozeduren
+-> können Nebeneffekte haben (z.B. Klassenvariablen verändern)
+
+
+1.24 Klassenvariablen (globale Variablen)
+
+- Variablen können auch außerhalb von Methoden deklariert werden 
+- Bsp:
+
+public class Test1 
+{
+	static int a, b;
+	public static void m(int x){…}
+	public static void main(String[] args) {…}
+}
+
+
++ a und b sind Klassenvariablen (globale Variablen)
+-> durch static gekennzeichnet
+-> können in allen Methoden der Klasse nebutzt werden
+-> Speicherplatz wird beim Programmstart angelegt btw. beim Programmende wieder freigegeben
+-> Werte existieren über Methodenaufrufe hinweg 
+
+1.25 Verwendung lokaler (innerhalb einer Methode) und globaler (innerhalb einer Klasse) Variablen
+
+- wenn möglich, Variablen immer lokal deklarieren
++ keine Namenskonflikte mit anderen Methoden
++ keine Probleme bei Veränderung einer gemeinsam genutzten globalen Variable
++ globale Variablen nur verwenden, wenn Wert über mehrere Methoden-Aufruge hinweg verfügbar sein muss
+
+1.26 Sichtbarkeit
+
+- Programmstück, in dem auf die Bezeichner zugegriffen werden kann
+- Bezeichner in einer Klasse 
++ ist in der ganzen Klasse gültig
++ kann in Methoden neu deklariert werden und ist dort nicht sichtbar (wird durch die neue Deklaration überdeckt)
+- Bezeichner in einem Block (z.B. Rumpf der Methode)
++ gültig von der Deklaration bis zum Ende des Blocks, in dem er deklariert wurde 
++ Blöcke können verschachtelt werden
++ in einem geschachtelten Block kann aber keine neue Deklaration erfolgen 
+
+1.27 Lebensdauer
+
+- Zeitinterall, in dem die Variable zur Laufzeit existiert 
+- lokale Variablen werden angelegt/freigegeben, wenn ihr Block betreten/verlassen wird
+- statische Variablen einer Klasse
++ werden angelegt, wenn die Klasse geladen wird
++ werden freigegeben, wenn die Klasse entladen wird (am Ende des Programms)
+
+1.28 Überladen von Methoden
+
+- Methoden einer Klasse müssen sich in der Signatur unterscheiden 
+- das bedeutet aber auch:
++ name kann gleich bleiben solange die Typliste der formalen Parameter unterschiedlich ist 
+-> unterschiedliche Typen, unterschiedliche Reihenfolge der Typen, unterschiedliche Anzahl der Typen
++ wird der gleiche Name für zwei oder mehrere Methoden verwendet, dann wird die Methode überladen (overloading)
+
+- Bsp:
+
+public class OLTest 
+{
+	public static void myPrint(int i)
+	{
+		System.out.println("Integer: " + i);
+	}
+	public static void myPrint(double i)
+	{
+		System.out.println("Double: " + i);
+	}
+	public static void myPrint(int i, int j)
+	{
+		System.out.println("Integer + Integer: " + i + " "+ j);
+	}
+	public static void myPrint(int i, double j)
+	{
+		System.out.println("Integer + Double: " + i + " "+ j);
+	}
+	public static void myPrint(double i, int j)
+	{
+		System.out.println("Double + Integer: " + i + " "+ j);
+	}
+	public static void main(String[] args) 
+	{
+		myPrint(10);
+		myPrint(10D);
+		myPrint(10, 'a');
+		myPrint(10, 10D);
+		myPrint(10F, 10);
+	}
+}
+
+(Ausgabe)
+Integer: 10
+Double: 10.0
+Integer + Integer: 10 97
+Integer + Double: 10 10.0
+Double + Integer: 10.0 10
+
+1.29 Methoden mit variabler Parameteranzahl
+
+- normalerweise feste Anzahl an Paramtern
+- Manchmal wird eine beliebige Anzahl von Parametern eines Typs benötigt
+- herkömmliche Lösung:
++ mithilfe eines Arrays
++ Bsp:
+
+public static int sum(int[] values) { .. }
+
+
+- ab Java 1.5 gibt es varargs-Parameter
+
+public static int sum(int… values){ .. }
+
+
++ aus dem varargs-Parameter wird automatisch ein Array erzeugt
++ der varargs-Parameter muss immer an der letzten Stelle stehen
++ Bsp:
+
+public class VarargsTest 
+{
+	public static void print(int i, int j) 
+	{
+		System.out.println("Integer " + i + " " + j);
+	}
+	public static void print(int i, int... values) 
+	{
+		System.out.print("Integer " + i + " --- ");
+		System.out.print("Varargs - Laenge: " + values.length + " Werte: ");
+		for(int x = 0; x < values.length;x++) // Herkömmlich
+		System.out.print(values[x]);
+	}
+	public static int sum(int... values)
+	{
+		int result = 0;
+		for(int x : values) // Iterator Form
+		result = result + x;
+		return result;
+	}
+	public static void main(String[] args) 
+	{
+		System.out.println(sum(1, 2, 3));
+		System.out.println(sum(1, 2, 3, 4, 5));
+		System.out.println(sum());
+		print(1, 2);
+		print(1, 2, 3);
+	}
+}
+
+(Ausgabe)
+6
+15
+0
+Integer 1 2
+Integer 1 --- Varargs - Laenge: 2 Werte: 23
+
+
+1.30 Vordefinierte statische Methoden
+
+- Java bietet etliche statische Methoden (Klassenmethoden) in speziellen Klassen an
++ gehören nur zur Klasse, nie zu einem Objekt 
+
+- Typischer Aufruf
++ ClassName.MethodeName(Parameter)
++ Bsp:
+
+Math.sqrt(10.0);
+
+- Manchmal auch in der Form:
++ ClassName.FieldName.MethodName(Parameter)
++ Bsp:
+
+System.out.println(x);
+
+1.31 vordefinierte Konstanten
+
+- neben statischen Methoden gibt es auch globale Konstanten (und deren Methoden)
+- className.CONSTANT_NAME
+- Bsp:
+
+Math.PI
+Integer.MAX_VALUE
+
+1.32 Beispiele für Klassen
+
+- System
++ System.out.println() etc.
+
+- Math
++ Math.random(), Math.sqrt(10.0) etc.
+
+- Arrays
++ Hilfsklasse für Arrays
++ muss importiert werden
++ nützliche überladene Methoden (hier für int):
+-> binarySearch(int[] a, int key)
+-> equals(int[] a, int [] a2)
+-> deepEquals(Object[] a1, Object[] a2
+-> fill(int[] a, int val) oder fill(int[] a, int fromIndex, int toIndex, int val)
+-> sort(int[] a) oder sort(int[] a, int fromIndex, int toIndex)
+
+1.33 Importieren
+
+- bestimmte Klassen werden automatisch geladen
++ z.B. Klasse Math
+
+- andere Klassen müssen importiert werden 
++ 2 Arten des Importierens:
+-> expliziter Import(am Anfang der Datei)
+
+import java.util.Arrays;
+import java.util.*;  // Alle Klasse aus java.util werden importiert 
+
+-> impliziter Import (bei Verwendung)
+
+java.util.Arrays.sort(x);
+
+- Dokumentation der Klassen:
++ Startpunkt:
+
+http://docs.oracle.com/javase/8/docs/api/
+
+
++ Informationen 
+-> in welchem Paket findet man die Klasse?
+   - die einzelnen Klassen eines Pakets können ausgewählt werden
+-> für eine bestimmte Klasse
+   - Beschreibung der Klasse
+   - Liste der Methoden
+-> für jede Methode 
+   - Kurzbeschreibung 
+   - längere Beschreibung (Parameter, Ausnahmen etc.)
+
+- Bsp. Arrays - Hilfsklassen
+
+import java.util.Arrays;
+public class ArrayTest 
+{
+	public static void main(String[] args) 
+	{
+		int[] x = { 3, 5, 2, 7, 9, 4, 6, 1, 8 };
+		boolean[] y = new boolean[3], z = new boolean[3];
+		Arrays.sort(x);
+		// java.util.Arrays.sort(x); impliziter Import
+		for (int i : x) 
+		{
+			System.out.print(i);
+		}
+		System.out.println();
+		System.out.println(Arrays.binarySearch(x, 1));
+		Arrays.fill(y, true);
+		Arrays.fill(z, true);
+		for (boolean i : y)
+		{
+		System.out.print(i + " ");
+		}
+		System.out.println("\n" + (y == z));
+		System.out.println(Arrays.equals(y, z));
+		y = z;
+		System.out.println(y == z);
+	}
+}
+(Ausgabe)
+123456789
+0
+true true true
+false
+true
+true
